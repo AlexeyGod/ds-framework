@@ -1,0 +1,22 @@
+.grid-table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid #b9b9b9;
+}
+.grid-table td, .grid-table th {
+    border: 1px solid #b9b9b9;
+    padding: 5px;
+}
+.grid-table tr.child1 {
+    background: #3a3a3a;
+}
+.grid-table tr.child2 {
+    background: #565656;
+}
+.grid-table tr.child3 {
+    background: #656565;
+}
+.tree-link {
+    color: #bebebe;
+}

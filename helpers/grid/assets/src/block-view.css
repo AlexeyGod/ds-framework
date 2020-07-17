@@ -1,0 +1,9 @@
+.dragAndDrop .ghost {
+    border: 2px solid #0e7eff;
+}
+.dragAndDrop .selected {
+    border: 2px dashed green;
+}
+.dragAndDrop .item .move {
+    cursor: move;
+}
