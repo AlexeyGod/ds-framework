@@ -1,0 +1,12 @@
+{
+    "name": "alexeygod/ds-framework",
+    "description": "User extension for ds-framework",
+    "minimum-stability":"dev",
+    "authors": [
+        {
+            "name": "AlexeyGod",
+            "email": "forlem@gmail.com"
+        }
+    ],
+    "require": {}
+}
