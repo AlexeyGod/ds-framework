@@ -31,16 +31,18 @@ class BaseApplication extends Container
         $this->_systemConfig = DefaultConfig::load($options);
 
         // Настройка алиасов
-        foreach ($this->_systemConfig['aliases'] as $aliasName => $aliasValue)
-        {
-            static::setAlias($aliasName, $aliasValue);
-        }
+        if(isset($this->_systemConfig['aliases']))
+            foreach ($this->_systemConfig['aliases'] as $aliasName => $aliasValue)
+            {
+                static::setAlias($aliasName, $aliasValue);
+            }
 
         // Настройка DI-Контейнеров
-        foreach ($this->_systemConfig['containers'] as $containerName => $containerOptions)
-        {
-            static::setContainer($containerName, $containerOptions);
-        }
+        if(isset($this->_systemConfig['containers']))
+            foreach ($this->_systemConfig['containers'] as $containerName => $containerOptions)
+            {
+                static::setContainer($containerName, $containerOptions);
+            }
 
         // Запуск базовых компонентов
         if(empty($this->_systemConfig['components'])) exit("Build error: components list in config is empty");
