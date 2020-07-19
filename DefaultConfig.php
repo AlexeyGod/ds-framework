@@ -11,7 +11,7 @@ namespace framework;
 class DefaultConfig
 {
 
-    public static function load($userConfig)
+    public static function load($userConfig = [])
     {
         return array_replace_recursive(
             array_merge(
