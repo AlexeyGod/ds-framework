@@ -13,6 +13,9 @@ class DefaultConfig
 
     public static function load($userConfig = [])
     {
+        if(!is_array($userConfig))
+        $userConfig = [];
+        
         return array_replace_recursive(
             array_merge(
             self::getComponents(),
