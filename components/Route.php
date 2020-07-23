@@ -284,9 +284,9 @@ class Route
             //exit('DEBUG');
 
         }
-        exit('404: Not found (re-work in '.__FILE__.')'.PHP_EOL
+        exit('404: Not found (re-work in '.__FILE__.' on line '.__LINE__.')'.PHP_EOL
             .'Request: '.Application::app()->request->getCurrent().PHP_EOL
-            .'is_module: '.var_export($this->is_module('content'), true).PHP_EOL
+            //.'is_module: '.var_export($this->is_module('content'), true).PHP_EOL
             .var_export($this->route, true)
             .'Status: '.var_export($this->status, true)
         );

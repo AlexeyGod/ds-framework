@@ -108,8 +108,6 @@ class DefaultConfig
                     '@web' => '/',
                     '@application' => getenv('DOCUMENT_ROOT').'/application',
                     '@themes' => getenv('DOCUMENT_ROOT').'/themes',
-                    '@modules' => getenv('DOCUMENT_ROOT').'/modules',
-                    '@framework' => getenv('DOCUMENT_ROOT').'/framework',
                     '@uploadPath' => '/uploads', // Указывается относительно ROOT
                 ],
         ];
