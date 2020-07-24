@@ -28,10 +28,14 @@ class BaseException extends \Exception {
     {
         $stack = ''; // Инициализируем стек
         $template = false; // Выключаем вывод шаблона ошибки по умолчанию
+
+
         if(!method_exists($exception, 'exceptionName'))
         {
             //$stack .=
-            exit('(ReWork BaseException)Не обработанное исключение в классе '.get_class($exception).' '.$exception->getMessage()." in file \n\n<pre>".var_export($exception, true).'</pre>');
+            exit('(ReWork BaseException)Не обработанное исключение в классе '.get_class($exception)
+                .'<br>'.
+                $exception->getMessage()." in file \n\n<pre>".var_export($exception, true).'</pre>');
         }
         else
         {
