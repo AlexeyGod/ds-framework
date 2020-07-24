@@ -17,10 +17,10 @@ class DataBase
 
     public function __construct($options = [])
     {
-        if(!empty($options['host']) ||
+        if(empty($options['host']) ||
         !isset($options['username']) ||
         !isset($options['password']) ||
-        !empty($options['database']))
+        empty($options['database']))
             throw new NotInstallException("Для работы компонента DataBase необходимо указать host, username, password и database");
 
         $defaultCharset  = (isset($options['defaultCharset']) ? $options['defaultCharset'] : 'utf-8');
