@@ -31,6 +31,9 @@ class BaseApplication extends Container
         $this->_systemConfig = DefaultConfig::load($options);
 
         // Настройка алиасов
+        // .. статические
+        static::setAlias('@framework', dirname(__DIR__));
+        //.. динамические
         if(isset($this->_systemConfig['aliases']))
             foreach ($this->_systemConfig['aliases'] as $aliasName => $aliasValue)
             {
