@@ -1,6 +1,8 @@
 {
     "name": "alexeygod/ds-framework",
-    "description": "User extension for ds-framework",
+    "description": "ds-framework",
+    "license": "BSD-3-Clause",
+
     "minimum-stability":"dev",
     "authors": [
         {
