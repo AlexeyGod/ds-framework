@@ -10,7 +10,7 @@ namespace framework\models;
 use framework\components\db\ActiveRecord;
 use framework\components\db\SqlBuilder;
 
-class Settings extends ActiveRecord
+class DbSettings extends ActiveRecord
 {
     public function getTypes()
     {

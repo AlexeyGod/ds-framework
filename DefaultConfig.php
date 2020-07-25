@@ -33,16 +33,6 @@ class DefaultConfig
                     'logger' => [
                         'class' => 'framework\\helpers\\Logger'
                     ],
-                    'db' => [
-                        'class' => 'framework\\components\\db\\DataBase',
-                        'options' => [
-                            'host' => 'localhost',
-                            'database' => 'project',
-                            'username' => 'root',
-                            'password' => '',
-                            'defaultCharset' => 'utf-8',
-                        ],
-                    ],
                     'request' => [
                         'class' => 'framework\\components\\Request',
                     ],
@@ -69,7 +59,7 @@ class DefaultConfig
                         ]
                     ],
                     'identy' => [
-                        'class' => 'modules\\user\\models\\User',
+                        'class' => 'application\\models\\User',
                         'options' => [
                             'autoLogin' => true
                         ]
@@ -108,7 +98,7 @@ class DefaultConfig
                     '@web' => '/',
                     '@application' => getenv('DOCUMENT_ROOT').'/application',
                     '@themes' => getenv('DOCUMENT_ROOT').'/themes',
-                    '@uploadPath' => '/uploads', // Указывается относительно ROOT
+                    '@uploadPath' => '/uploads', // Указывается относительно WEB ROOT
                 ],
         ];
     }

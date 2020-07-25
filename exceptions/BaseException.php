@@ -26,6 +26,23 @@ class BaseException extends \Exception {
 
     public static function errorHandler($exception)
     {
+        if(method_exists($exception, 'asPage'))
+        {
+            return $exception->asPage();
+        }
+        else
+        {
+            exit('(ReWork BaseException)Не обработанное исключение в классе '.get_class($exception)
+                .'<br>'.
+                $exception->getMessage()." in file \n\n<pre>".var_export($exception, true).'</pre>');
+        }
+    }
+
+    /**
+     * Старый обработчик - deprecated
+    */
+    public static function errorHandlerBackup($exception)
+    {
         $stack = ''; // Инициализируем стек
         $template = false; // Выключаем вывод шаблона ошибки по умолчанию
 

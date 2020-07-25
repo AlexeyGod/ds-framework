@@ -13,6 +13,7 @@ use framework\exceptions\NotInstallException;
 
 class DataBase
 {
+    public $enable = false; // Состояние сконфигурированного объекта
     private $pdo;
 
     public function __construct($options = [])

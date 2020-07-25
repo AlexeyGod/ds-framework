@@ -11,8 +11,8 @@ namespace framework\core;
 use framework\exceptions\ErrorException;
 use framework\gi\Container;
 use framework\DefaultConfig;
-use framework\models\Modules;
-use framework\models\Settings;
+use framework\components\module\ModuleManager;
+use framework\components\Settings;
 
 class BaseApplication extends Container
 {
@@ -59,7 +59,7 @@ class BaseApplication extends Container
         }
 
         // Запуск модулей
-        $modules = Modules::find()->orderBy(['priority' => 'asc'])->all();
+        $modules = ModuleManager::getAllasObjects();
         foreach ($modules as $module)
         {
             $this->__setModule($module);
