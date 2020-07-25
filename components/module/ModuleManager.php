@@ -14,7 +14,7 @@ use framework\models\Modules;
 class ModuleManager
 {
    public static function getAllasObjects() {
-      if(Application::is_component('db'))
+      if(Application::app()->is_component('db'))
          return Modules::find()->orderBy(['priority' => 'asc'])->all();
 
       else

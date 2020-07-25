@@ -8,13 +8,14 @@
 
 namespace framework\components;
 
+use framework\core\Application;
 use framework\models\DbSetting;
 
 class Settings
 {
    public static function checkUseDb()
    {
-      return Application::is_component('db');
+      return Application::app()->is_component('db');
    }
 
    public static function getConfig($configName)
