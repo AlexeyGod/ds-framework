@@ -255,7 +255,7 @@ class Route
 
     public function notFound()
     {
-        if(true)
+        if(Application::app()->getConfig('debug'))
         {
             $url = Application::app()->request->getCurrent();
 
@@ -281,15 +281,20 @@ class Route
 
             }
             echo "</table>";
-            //exit('DEBUG');
-
-        }
-        exit('404: Not found (re-work in '.__FILE__.' on line '.__LINE__.')'.PHP_EOL
+            exit('404: Not found (re-work in '.__FILE__.' on line '.__LINE__.')'.PHP_EOL
             .'Request: '.Application::app()->request->getCurrent().PHP_EOL
             //.'is_module: '.var_export($this->is_module('content'), true).PHP_EOL
             .var_export($this->route, true)
             .'Status: '.var_export($this->status, true)
-        );
+            );
+        }
+        else
+        {
+            $this->controller = $this->defaultController;
+            $this->action = 'error';
+            return $this->execute();
+        }  
+       
     }
 
     public function execute()
