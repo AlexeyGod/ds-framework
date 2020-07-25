@@ -8,6 +8,7 @@
 
 namespace framework\components\module;
 
+use framework\core\Application;
 use framework\models\Modules;
 
 class ModuleManager
