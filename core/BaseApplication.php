@@ -19,38 +19,36 @@ class BaseApplication extends Container
     public static $_aliases = [];
     protected $_components; // Массив созданных компонентов
     protected $_modules; // Массив созданных модулей
-    static $_config; // Массив настроек
+    public $appConfig; // Массив настроек
     protected $_systemConfig; // Массив Всех системных настроек
 
-    public function __construct($options = [])
+    public function __construct($appConfig = [])
     {
+        $this->appConfig = $appConfig;
         // Обработчик ошибок
-        set_exception_handler(['framework\\exceptions\\BaseException', 'errorHandler']);
-
-        // Подгружаем дефолтные значения
-        $this->_systemConfig = DefaultConfig::load($options);
+        set_exception_handler(['framework\\exceptions\\Handler', 'errorHandler']);
 
         // Настройка алиасов
         // .. статические
         static::setAlias('@framework', dirname(__DIR__));
         //.. динамические
-        if(isset($this->_systemConfig['aliases']))
-            foreach ($this->_systemConfig['aliases'] as $aliasName => $aliasValue)
+        if(isset($this->appConfig['aliases']))
+            foreach ($this->appConfig['aliases'] as $aliasName => $aliasValue)
             {
                 static::setAlias($aliasName, $aliasValue);
             }
 
         // Настройка DI-Контейнеров
-        if(isset($this->_systemConfig['containers']))
-            foreach ($this->_systemConfig['containers'] as $containerName => $containerOptions)
+        if(isset($this->appConfig['containers']))
+            foreach ($this->appConfig['containers'] as $containerName => $containerOptions)
             {
                 static::setContainer($containerName, $containerOptions);
             }
 
         // Запуск базовых компонентов
-        if(empty($this->_systemConfig['components'])) exit("Build error: components list in config is empty");
+        if(empty($this->appConfig['components'])) exit("Build error: components list in config is empty");
 
-        foreach ($this->_systemConfig['components'] as $componentName => $componentOptions)
+        foreach ($this->appConfig['components'] as $componentName => $componentOptions)
         {
             if(!class_exists($componentOptions['class']))
                 throw new ErrorException("Не удается создать компонент ".$componentName." класса ".$componentOptions['class']." проверьте конфигурацию");
@@ -66,9 +64,9 @@ class BaseApplication extends Container
         }
 
         // Запуск модуля отладки
-       if(isset($this->_systemConfig['debug']))
+       if(isset($this->appConfig['debug']))
        {
-           if($this->_systemConfig['debug'])
+           if($this->appConfig['debug'])
            {
                $debug = new \stdClass();
                $debug->name = 'debug';
@@ -136,8 +134,6 @@ class BaseApplication extends Container
         return Settings::getConfig($configName);
     }
 
-
-
     // Магический метод для доступа к компонентам
     public function __get($name)
     {
@@ -177,5 +173,4 @@ class BaseApplication extends Container
             return Application::app()->logger->clearLog();
         }
     }
-
 }

@@ -11,12 +11,11 @@ use framework\components\Route;
 
 class Application extends BaseApplication
 {
-    public static $_config; // Входные настройки
     public static $app; // Экземпляр приложения
 
     public function __construct($config = [])
     {
-        self::$app = $this;
+        self::$app = $this;  // Экземпляр приложения для реазизации app()
         parent::__construct($config);
     }
 
@@ -29,17 +28,12 @@ class Application extends BaseApplication
     {
         if(is_object(self::$app)) return self::$app;
         else
-            throw new ErrorExtension('Ошибка сборки App');
+            throw new \Exception("Приложение не запущено");
     }
 
-    public function getVersion()
+    public function version()
     {
         return '0.1.0';
-    }
-
-    public function getCopyright()
-    {
-        return '© 2020 DS-framework';
     }
 
 }
