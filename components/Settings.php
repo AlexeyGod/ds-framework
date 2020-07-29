@@ -9,42 +9,43 @@
 namespace framework\components;
 
 use framework\core\Application;
+use framework\exceptions\NotInstallException;
+use framework\helpers\ArrayHelper;
 use framework\models\DbSetting;
 
 class Settings
 {
-   public static function checkUseDb()
-   {
-      return Application::app()->is_component('db');
-   }
+   public $config = [];
+   public $db_class = 'framework\\models\\DbSettings';
 
-   public static function getConfig($configName)
+   public function __construct(Array $config = [])
    {
-      if(static::checkUseDb())
+      $this->config = $config;
+      if($this->checkUseDb())
       {
-         return DbSetting::getConfig($configName);
-      }
+         $this->config = array_merge($this->config, $this->loadAllConfigFromDb());
 
-      else
-         return static::getStaticConfig($configName); 
+         if(!isset($this->config['version']))
+            throw new NotInstallException();
+      }
    }
 
-   public static function getStaticConfig($configName)
+   public function checkUseDb()
    {
-      switch ($configName):
+      if(!isset($this->config['_system']['use_db']))
+         $this->config['_system']['use_db'] = Application::app()->is_component('db');
 
-         case 'theme':
-            return 'basic';
-         break;
+      return $this->config['_system']['use_db'];
+   }
 
-         case 'secretKey':
-            return getenv('HTTP_HOST');
-         break;
+   public function loadAllConfigFromDb()
+   {
+      $staticClass = $this->db_class;
+      return ArrayHelper::map($staticClass::findAll(), 'name', 'value');
+   }
 
-         default:
-         return false;
-         break;
-
-      endswitch;
+   public function getConfig($configName)
+   {
+      return isset($this->config[$configName]) ? $this->config[$configName] : '';
    }
 }

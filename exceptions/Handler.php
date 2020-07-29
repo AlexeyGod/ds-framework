@@ -15,6 +15,7 @@ class Handler {
 
     public static function errorHandler($exception)
     {
+
         $trace = debug_backtrace();
         $bTrace = $trace[0]['args'][0];
 
@@ -22,6 +23,11 @@ class Handler {
 
         preg_match_all ("/#[0-9]{1,10}\s(?<file>.+)\s(?<code>.+)\n/isU", $bTrace, $matches);
 
+        if(Application::$appConfig['app'] == 'terminal')
+        {
+            var_export($matches, true);
+            exit();
+        }
 
         header ("Content-type: text/html; charset=utf-8");
         ?>

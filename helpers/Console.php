@@ -42,9 +42,11 @@ class Console
         'light_gray' => '47'
     ];
 
+    public $dialog;
+
     public function __construct()
     {
-        $this->startDialog();
+        $this->dialog = $this->startDialog();
     }
 
     protected function startDialog() {
@@ -68,7 +70,7 @@ class Console
         else
             $sBgColor = $this->bgColors[$bgColor];
 
-        echo " \033[".$sColor."m"."\033[".$sBgColor."m ";
+        echo "\033[". $sColor ."m". "\033[". $sBgColor ."m";
 
         return $this;
     }
@@ -79,7 +81,7 @@ class Console
         foreach ($this->colors as $colorLabel => $colorCode)
         {
             $this->setColor($colorLabel);
-            $this->writeLn($colorLabel);
+            $this->writeLn(" [". $colorLabel."]");
         }
 
         $this->setColor();
@@ -89,7 +91,7 @@ class Console
         foreach ($this->bgColors as $colorLabel => $colorCode)
         {
             $this->setColor('', $colorLabel);
-            $this->writeLn($colorLabel);
+            $this->writeLn( "[".$colorLabel."]");
         }
 
         // Set Default font
