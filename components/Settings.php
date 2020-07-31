@@ -9,9 +9,9 @@
 namespace framework\components;
 
 use framework\core\Application;
-use framework\exceptions\NotInstallException;
+use framework\exceptions\NotInstallFrameworkException;
 use framework\helpers\ArrayHelper;
-use framework\models\DbSetting;
+
 
 class Settings
 {
@@ -23,10 +23,16 @@ class Settings
       $this->config = $config;
       if($this->checkUseDb())
       {
-         $this->config = array_merge($this->config, $this->loadAllConfigFromDb());
+         try {
+            $dbConfig = $this->loadAllConfigFromDb();
+         }
+         catch(\PDOException $e)
+         {
+            // exit(123);
+            throw new NotInstallFrameworkException();
+         }
 
-         if(!isset($this->config['version']))
-            throw new NotInstallException();
+         $this->config = array_merge($this->config, $dbConfig);
       }
    }
 

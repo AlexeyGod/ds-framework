@@ -41,6 +41,16 @@ class DataBase
         return $this->pdo;
     }
 
+    public function beginTransaction()
+    {
+        $this->pdo->beginTransaction();
+    }
+
+    public function commit()
+    {
+        $this->pdo->commit();
+    }
+
     public function query($sql, $params = [])
     {
         $query = $this->pdo->prepare($sql);

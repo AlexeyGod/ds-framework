@@ -29,6 +29,9 @@ class Handler {
             exit();
         }
 
+        if(method_exists($exception, 'asPage'))
+            return $exception->asPage();
+
         header ("Content-type: text/html; charset=utf-8");
         ?>
         <html>
