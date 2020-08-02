@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: GODINSKIJ_AI
- * Date: 31.07.2020
- * Time: 9:34
- */
 
 namespace framework\migrations;
 

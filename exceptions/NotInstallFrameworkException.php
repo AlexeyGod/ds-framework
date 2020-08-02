@@ -114,7 +114,8 @@ class NotInstallFrameworkException extends \Exception {
             /**
              * Создание базовых таблиц
              */
-            $migration = new framework\migrations\m_install_basic_0();
+
+            $migration = new \framework\migrations\m_install_basic_0(['db' => $db]);
             $migration->up();
 
             echo 'Создание таблиц в MySQL';
