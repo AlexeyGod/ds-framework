@@ -110,92 +110,16 @@ class NotInstallFrameworkException extends \Exception {
              */
             $config = require($configFile);
             $db = new DataBase($config['components']['db']['options']);
-
-            /*
-            <article>
-                <pre>DB: <?=var_export($config['components']['db'], true)?></pre>
-            </article>
-               */ ?>
-            <?
+            
             /**
-             * SQL Dump's in directory install
+             * Создание базовых таблиц
              */
+            $migration = new framework\migrations\m_install_basic_0();
+            $migration->up();
 
-            $sqlDumpDirectory = getenv("DOCUMENT_ROOT").'/migrations';
-
-            $sqlFiles = [];
-
-            foreach (glob ($sqlDumpDirectory.'/*') as $file)
-            {
-                $sqlFiles[] = [
-                    'file' => $file,
-                    'name' => basename($file),
-                    'migration' => substr(basename($file), 0, -4)
-                ];
-            }
+            echo 'Создание таблиц в MySQL';
+            
             ?>
-            <!-- SQL Dumps-->
-            <article>
-                <h2>Миграции</h2>
-                <p>Каталог миграций: <code><?=$sqlDumpDirectory?></code></p>
-                <hr>
-                <?php
-
-                if(count($sqlFiles) > 0)
-                {
-                    echo '<table>';
-
-                    echo '<tr>'
-                        .'<th>'
-                        .'№'
-                        .'</th>'
-                        .'<th>'
-                        .'Название'
-                        .'</th>'
-                        .'<th>'
-                        .'Путь'
-                        .'</th>'
-                        .'<th>'
-                        .'Установка'
-                        .'</th>'
-                        .'</tr>';
-
-                    foreach ($sqlFiles as $tNumber => $item) {
-                        echo '<tr>'
-                            .'<td>'
-                            .($tNumber+1)
-                            .'</td>'
-                            .'<td>'
-                            .$item['migration']
-                            .'</td>'
-                            .'<td>'
-                            .$item['file']
-                            .'</td>';
-
-
-                        require_once ($item['file']);
-
-                        $className = 'migrations\\'.$item['migration'];
-                        $m = new $className($db);
-
-                    if($this->status)
-                        echo 'success';
-                        else
-                        {
-                            foreach ($m->errors as $error)
-                                echo '<p>'.htmlspecialchars(stripslashes($error)).'</p>';
-                        }
-                        echo '<td></td>';
-
-                        echo '</tr>';
-                    }
-
-                    echo '</table>';
-                }
-                else
-                    echo 'Migrations not found';
-
-                ?>
             </article>
 
             </section>
