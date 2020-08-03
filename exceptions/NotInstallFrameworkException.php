@@ -19,7 +19,7 @@ class NotInstallFrameworkException extends \Exception {
         //return $this->asPage();
     }
 
-    public function asPage()
+    public function asPage($message = '')
     {
         /**
          * Конфигурации
@@ -83,6 +83,19 @@ class NotInstallFrameworkException extends \Exception {
                         min-height: 800px;
                         padding: 20px;
                     }
+                    article {
+                        padding: 20px;
+                    }
+                    button {
+                        padding: 5px 15px;
+                    }
+                    .app-start {
+                        background: #beff72;
+                        color: darkgreen;
+                        border: 1px solid green;
+                        border-bottom: 2px solid darkgreen;
+                        border-right: 1px solid darkgreen;
+                    }
 
                     article table {
                         width: 100%;
@@ -104,25 +117,44 @@ class NotInstallFrameworkException extends \Exception {
                 <h1>Установка системы</h1>
             </header>
             <section>
-            <?php
-            /**
-             * Определение конфигурации
-             */
-            $config = require($configFile);
-            $db = new DataBase($config['components']['db']['options']);
-            
-            /**
-             * Создание базовых таблиц
-             */
+                <?
+                /*
+                ?>
+                <article>
+                    <h2>Текущая ошибка</h2>
+                    <p>
+                        <?=$message?>
+                    </p>
+                    <p>
+                        <pre>
+                            <?=var_export(debug_backtrace(), true)?>
+                        </pre>
+                    </p>
+                </article>
+                */
+                ?>
+                <article>
+                    <h2>Создание таблиц</h2>
+                <?php
+                /**
+                 * Определение конфигурации
+                 */
+                $config = require ($configFile);
+                $db = new DataBase($config['components']['db']['options']);
 
-            $migration = new \framework\migrations\m_install_basic_0(['db' => $db]);
-            $migration->up();
+                /**
+                 * Создание базовых таблиц
+                 */
+                $migration = new \framework\migrations\m_install_basic_0(['db' => $db]);
 
-            echo 'Создание таблиц в MySQL';
-            
-            ?>
-            </article>
+                //echo 'Test message for formatting';
+                echo $migration->up();
 
+                ?>
+                </article>
+                <article>
+                    <button class="app-start" onclick="location.reload()">Перейти на сайт</button>
+                </article>
             </section>
             <footer>
                 Powered by <b>DS-Framework</b>

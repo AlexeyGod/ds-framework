@@ -29,7 +29,7 @@ class Settings
          catch(\PDOException $e)
          {
             // exit(123);
-            throw new NotInstallFrameworkException();
+            throw new NotInstallFrameworkException($e->getMessage());
          }
 
          $this->config = array_merge($this->config, $dbConfig);

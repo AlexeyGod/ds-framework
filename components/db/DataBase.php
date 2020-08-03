@@ -73,6 +73,14 @@ class DataBase
         return $query;
     }
 
+    public function trueQuery($sql)
+    {
+        $query = $this->pdo->query($sql);
+        $query->execute();
+
+        return $query;
+    }
+
     public function row($sql, $params = [])
     {
         $query = $this->query($sql, $params);

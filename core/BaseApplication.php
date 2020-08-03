@@ -85,6 +85,7 @@ class BaseApplication extends Container
     protected function __setModule($moduleArObject)
     {
         $object = $this->createObject($moduleArObject->class);
+
         // Есть модуль содержит маршруты - добавляем их
         if(count($object->routes) > 0)
         {

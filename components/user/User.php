@@ -15,4 +15,5 @@ class User  implements UserInterface
     public function can($acceptName){ return false;}
     public function getShortName(){ return 'SomeName';}
     public function logout(){ return true;}
+
 }

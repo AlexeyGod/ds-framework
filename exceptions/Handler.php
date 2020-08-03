@@ -30,7 +30,7 @@ class Handler {
         }
 
         if(method_exists($exception, 'asPage'))
-            return $exception->asPage();
+            return $exception->asPage($traceHeader);
 
         header ("Content-type: text/html; charset=utf-8");
         ?>

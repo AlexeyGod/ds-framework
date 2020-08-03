@@ -14,9 +14,9 @@ use framework\core\Application;
 class ModuleManager
 {
    public static function getAllasObjects() {
-      if(Application::app()->is_component('db'))
-         return Modules::find()->orderBy(['priority' => 'asc'])->all();
 
+      if(Application::app()->is_component('db'))
+         return Modules::find()->where(['status' => 1])->orderBy(['priority' => 'asc'])->all();
       else
          return static::getTmpObjects();
    }

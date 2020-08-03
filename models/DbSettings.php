@@ -12,6 +12,12 @@ use framework\components\db\SqlBuilder;
 
 class DbSettings extends ActiveRecord
 {
+
+    public static function tableName()
+    {
+        return 'global_settings';
+    }
+
     public function getTypes()
     {
         return [
