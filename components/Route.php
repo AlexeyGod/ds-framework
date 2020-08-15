@@ -142,6 +142,14 @@ class Route
         $this->controllerNamespace = $this->defaultControllerNamespace;
     }
 
+    public function redirect($url, $params = [])
+    {
+        return $this->route([
+            'route' => $url,
+            'params' => $params
+        ]);
+    }
+
     public function route($route)
     {
         $url = $route['route'];
@@ -281,7 +289,7 @@ class Route
 
             }
             echo "</table>";
-            exit('404: Not found (re-work in '.__FILE__.' on line '.__LINE__.')'.PHP_EOL
+            exit('PAGE (debug = true<br>404: Not found (re-work in '.__FILE__.' on line '.__LINE__.')'.PHP_EOL
             .'Request: '.Application::app()->request->getCurrent().PHP_EOL
             //.'is_module: '.var_export($this->is_module('content'), true).PHP_EOL
             .var_export($this->route, true)
@@ -314,13 +322,15 @@ class Route
         $this->status['params'] = $this->params;
 
         $options = [];
+        if($this->module) $options['module'] = $this->module;
+        //deprecated L0
         if($this->module) $options['moduleName'] = $this->module;
-        if($this->moduleClass) $options['moduleClass'] = $this->moduleClass;
+        //deprecated: if($this->moduleClass) $options['moduleClass'] = $this->moduleClass;
 
         $controller = Application::app()->createObject($this->controllerNormalize($this->controller), $options);
         $action = $this->actionNormalize($this->action);
 
         return call_user_func_array([$controller, $action], $this->params);
-        return $controller->$action($this->params);
+        //return $controller->$action($this->params);
     }
 }

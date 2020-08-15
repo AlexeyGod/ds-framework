@@ -26,7 +26,7 @@ class ActiveForm
 
     public static function submit($options = [])
     {
-        echo '<input type="submit" name="formSubmit" value="'.($options['value'] == '' ? 'Отправить' : $options['value']).'">'."\n";
+        echo '<input type="submit" '.(!empty($options['options']) ? self::options2attributes($options['options'], true) : '').' name="formSubmit" value="'.($options['value'] == '' ? 'Отправить' : $options['value']).'">'."\n";
     }
 
     public static function button($name, $options = [])
@@ -48,7 +48,6 @@ else
 $('$disableElementSelector').prop('disabled', true);
 })
 JS;
-
             Application::app()->assetManager->setJsCode($jsCode, ['depends' => ['framework\\assets\\jquery\\JqueryBundle']]);
 
             return $st;
@@ -123,7 +122,6 @@ JS;
         $st = '';
         if($label != '') $st .= '<label class="'.$labelClass.'">'.$model->label($label).'</label>';
         $st .= '<input name="'.$model->modelName().'['.$field.']" value="'.self::prepareValue($value).'"'.self::options2attributes($options['options']).'>'."\n".$error;
-
 
         return $st;
     }

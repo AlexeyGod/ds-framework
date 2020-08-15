@@ -21,6 +21,7 @@ class ModuleComponent implements ModuleInterface
    static $moduleName = '';
 
    public $routes = [];
+   public static $access = [];
 
 
    protected $_menu = [];
@@ -29,6 +30,11 @@ class ModuleComponent implements ModuleInterface
    public function __construct($options = [])
    {
 
+   }
+
+   public function getAccepts()
+   {
+      return is_array(static::$access) ? static::$access : [static::$access];
    }
 
    public function getControllerNamespace()

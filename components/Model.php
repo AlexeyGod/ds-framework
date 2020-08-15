@@ -12,6 +12,7 @@ class Model
     protected $_oldAttributes = [];
     protected $_attributes = [];
     protected $_attributeLabels = [];
+    protected $_errors = [];
     public $isNewRecord = true;
 
     public function __construct($options = [])
@@ -115,6 +116,11 @@ class Model
         return true;
     }
 
+    public function getErrorField($field)
+    {
+        return $this->_errors[$field];
+    }
+
     public function save()
     {
        if(method_exists($this, 'beforeSave'))
@@ -126,7 +132,19 @@ class Model
 
     public function load($array)
     {
-        $this->_attributes = array_replace($this->_attributes, $array);
+        if(!is_array($array) OR empty($array))
+            return false;
+
+        $changed = array_replace($this->_attributes, $array[ucfirst($this->modelName())]);
+        $changes = array_diff($changed, $this->_attributes);
+
+        if(count($changes) > 0)
+        {
+            $this->_attributes = $changed;
+            return true;
+        }
+        else
+            return false;
     }
 
     protected function beforeValidate($attributes)

@@ -20,12 +20,20 @@ class Controller
     protected $viewPath = '';
     protected $layoutPath = '';
 
+    protected $_module;
     protected $_moduleName;
     protected $_moduleClass;
 
     public function __construct($options = []) {
         // Модульность
-        $this->_moduleClass = (isset($options['moduleClass']) ? $options['moduleClass'] : false);
+        if(isset($options['module']))
+        {
+            $this->_module = Application::app()->getModule($options['module']);
+            $this->accepts = array_merge($this->accepts, $this->_module->getAccepts());
+        }
+
+        // deprecated: $this->_moduleClass = (isset($options['moduleClass']) ? $options['moduleClass'] : false);
+        // deprecated L0
         $this->_moduleName = (isset($options['moduleName']) ? $options['moduleName'] : false);
 
         if(!empty($this->accepts))
