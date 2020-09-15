@@ -21,9 +21,25 @@ class User extends Model  implements UserInterface
           // гость - состояние не авторизированного пользователя
         ],
         [
+            'username' => 'developer',
+            'password' => 'dev123',
+            'access' => [
+                'system',
+                'developer',
+                'manager', // Доступ к панели управления
+                'admin', // Доступ к администрированию
+
+                // Модуль "content"
+                'c-manager'
+            ]
+        ],
+        [
             'username' => 'admin',
             'password' => 'admin',
-            'access' => ['admin']
+            'access' => [
+                'manager', // Доступ к панели управления
+                'admin' // Доступ к администрированию
+            ]
         ]
     ];
 
@@ -81,6 +97,10 @@ class User extends Model  implements UserInterface
 
     public function isAuth() { return $this->_auth; }
 
+    public function getIdentity(){
+        return $this->id;
+    }
+
     public function can($acceptName){
 
         if(isset($this->_attributes['access']))
@@ -91,5 +111,7 @@ class User extends Model  implements UserInterface
         return false;
     }
     public function getShortName(){ return isset(static::$users[$this->id]['users']) ? static::$users[$this->id]['users'] : 'Unnamed user';}
-    public function logout(){ return true;}
+    public function logout(){
+       return Application::app()->request->unSetVar('_identy');
+    }
 }

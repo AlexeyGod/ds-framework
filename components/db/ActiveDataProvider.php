@@ -173,9 +173,9 @@ class ActiveDataProvider
 
     public function searchWidget($options = [])
     {
-        $template = '<div class="field">'."\n".
+        $template = '<div class="input-group col-xs-12">'."\n".
         "\t".'<form method="post">'."\n".
-        "\t\t".'<input type="text" name="search" placeholder="Поиск..." class="input search-input" autofocus>'.
+        "\t\t".'<input name="search" placeholder="Поиск..." class="form-control search-input" autofocus>'.
         "\t\t".'<input type="submit" style="display: none">'."\n".
         "\t</form>\n".
         "</div>\n";
@@ -188,9 +188,11 @@ class ActiveDataProvider
         if($this->search)
         {
             $output .= '<div class="search-results">'."\n"
-                ."\t".'<p>По запросу <b>&laquo;'.htmlspecialchars(stripslashes($this->search)).'&raquo</b> '.($this->items > 0 ? 'найдено '.$this->items.' совпадений' : 'ничего не найдено').'</p>'."\n"
-                ."\t".'<p><a href="/'.Application::app()->request->getCurrent().'">Сброс результатов</a></p>'
-                .'</div>';
+                ."\t".'<p class="text-muted">По запросу <b>&laquo;'.htmlspecialchars(stripslashes($this->search)).'&raquo</b> '.($this->items > 0 ? 'найдено '.$this->items.' совпадений' : 'ничего не найдено').'</p>'."\n";
+            //if($this->items > 0)
+                $output .= "\t".'<p><a href="/'.Application::app()->request->getCurrent().'">Сброс результатов</a></p>';
+
+            $output .= '</div>';
         }
 
         return $output;

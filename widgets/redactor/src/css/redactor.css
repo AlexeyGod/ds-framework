@@ -1,0 +1,53 @@
+.ds-redactor-frame {
+    display: block;
+    width: 100%;
+    border: 1px solid #bebebe;
+}
+.ds-redactor-div {
+    display: block;
+    width: 100%;
+    min-height: 200px;
+    border: 1px solid #bebebe;
+}
+.ds-redactor .controls {
+    border: 1px solid #bebebe;
+    padding: 6px;
+    background: #e0e0e0;
+}
+
+.ds-redactor .controls span img {
+    max-height: 24px;
+    width: auto;
+}
+.controls .format {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(190, 190, 190, 0.48);
+}
+.ds-redactor .controls span {
+    border: 1px solid #635d5b;
+    font-size: 12px;
+    padding: 2px 5px;
+    background: #bebebe;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px;
+    margin-right: 5px;
+}
+.ds-redactor .controls span.active {
+    background: #949494;
+    box-shadow: inset 1px 1px 1px
+}
+
+.ds-redactor .footer {
+    border: 1px solid #bebebe;
+    border-top: 0px;
+    background: #ececec;
+    font-size: 12px;
+    padding: 2px;
+}
+
+.ds-redactor .source-block {
+    display: none;
+}

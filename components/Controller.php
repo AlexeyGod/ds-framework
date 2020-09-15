@@ -40,7 +40,7 @@ class Controller
         {
             foreach($this->accepts as $accept)
                 if(!Application::app()->identy->can($accept)) {
-                    throw new AccessDeniedException("У Вас нет необходимых полномочий");
+                    throw new AccessDeniedException("Запрашиваемое право: ".$accept."");
                 }
         }
 

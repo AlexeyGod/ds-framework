@@ -108,6 +108,11 @@ class AssetManager
         // Проверка на дубликаты
         if(!in_array($class, $this->_bundles_stack))
         {
+            //echo "[[Зависимость: $class включена в пакет]]";
+            // Requires/Depends
+            if(!empty($bundle->depends))
+                $this->_useDepends($bundle->depends);
+
             // CSS
             $this->_css = array_merge($this->_css, $bundle->css);
             // JS

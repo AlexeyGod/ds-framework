@@ -140,13 +140,20 @@ class BaseApplication extends Container
         return $this->_settingsStorage->getConfig($configName);
     }
 
+    public function getConfigStorage(){
+        return $this->_settingsStorage;
+    }
+
     // Магический метод для доступа к компонентам
     public function __get($name)
     {
         if(isset($this->_components[$name]))
             return $this->_components[$name];
-        else
-            return false;
+
+        if(method_exists($this, 'get'.ucfirst($name)))
+            return $this->{'get'.ucfirst($name)}();
+
+        return false;
     }
 
     public function getComponentList()

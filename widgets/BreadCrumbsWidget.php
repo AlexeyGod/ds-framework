@@ -19,7 +19,7 @@ class BreadCrumbsWidget extends Widget
 
         if(count($breadcrumbsArray) > 0)
         {
-            $st .= "<ul id=\"breadcrumb\">\n";
+            $st .= "<ul class=\"breadcrumb\">\n";
 
             if(!empty($homeLink))
                 $st .= "\t".
@@ -34,7 +34,7 @@ class BreadCrumbsWidget extends Widget
                    ."\n";
                 else
                     $st .=  "\t".
-                        '<li class="current"><a class="disabled">'.$crumb['name'].'</a></li>'
+                        '<li class="active">'.$crumb['name'].'</li>'
                         ."\n";
             }
             $st .= "</ul>\n";

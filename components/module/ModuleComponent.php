@@ -87,7 +87,10 @@ class ModuleComponent implements ModuleInterface
                 ]   
             ];
       */
-      return false;
+      return [
+          'status' => 'error',
+         'error' => 'Метод установки не определен в классе',
+      ];
    }
 
    public static function unInstall()

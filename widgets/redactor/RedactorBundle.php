@@ -15,11 +15,16 @@ use framework\core\Application;
 class RedactorBundle extends Bundle
 {
     public  $depends = ['framework\\assets\\jquery\\JqueryBundle'];
-    public  $sourcePath = '@framework/widgets/redactor/ckeditor';
+    public  $sourcePath = '@framework/widgets/redactor/src';
     public $js = [
-        'ckeditor.js'
+        'js/redactor.js'
     ];
 
+    public $css = [
+        'css/redactor.css'
+    ];
+
+    /*
     public function init()
     {
         $activeThemeBundle = self::getActiveThemeBundle();
@@ -65,7 +70,7 @@ JSCODE;
          // Разрешает пользовательские классы
          config.indentClasses = ["ul-grey", "ul-red", "text-red", "ul-content-red", "circle", "style-none", "decimal", "paragraph-portfolio-top", "ul-portfolio-top", "url-portfolio-top", "text-grey"];
 
-         */
+
 
     $toolBarOptional = <<<JSCODE
     config.toolbar = 'MyToolbar';
@@ -87,5 +92,6 @@ JSCODE;
         file_put_contents(Application::app()->getRealPath($this->sourcePath."/config.js"), $configJS);
 
     }
+    */
 
 }

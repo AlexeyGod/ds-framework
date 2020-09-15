@@ -15,5 +15,6 @@ Interface UserInterface
     public function isAuth();
     public function can($permissionName);
     public function getShortName();
+    public function getIdentity();
     public function logout();
 }

@@ -27,7 +27,7 @@ class m_install_basic_0 extends Migration
                 . "('theme', 'basic', 1, 'framework\\\\widgets\\\\settings\\\\ThemeSelect', 'Тема сайта'),"
                 . "('secretKey', 'you_secret_key', 1, '', 'Секретный ключ для шифрования'),"
                 . "('defaultAdminView', 'index', 1, 'framework\\\\widgets\\\\settings\\\\AdminDefaultView', 'Стартовая страница панели управления'),"
-                . "('title', 'DS-Content Manager System', 1, '', '')");
+                . "('site_name', 'DS-Content Manager System', 1, '', 'Название сайта')");
 
             // global_modules
             $this->db->query("CREATE TABLE global_modules ("
@@ -38,13 +38,14 @@ class m_install_basic_0 extends Migration
                 . "priority int DEFAULT 0,"
                 . "status int DEFAULT 1,"
                 . "system int DEFAULT 0,"
+                . "install text,"
                 . "PRIMARY KEY(id))");
 
-            $this->db->query("INSERT INTO global_modules (name, class, icon, priority, status, system)"
+            $this->db->query("INSERT INTO global_modules (name, class, icon, priority, status, system, install)"
                 . "VALUES"
-                . "('user', 'application\\\\models\\\\User', 'icon-users', 0, 0, 0),"
-                . "('content', 'modules\\\\content\\\\ContentModule', 'icon-folder-plus', 0, 1, 1),"
-                . "('manager', 'modules\\\\manager\\\\ManagerModule', 'icon-folder-plus', 0, 1, 1)"
+                . "('user', 'application\\\\models\\\\User', 'icon icon-users', 0, 0, 0, '0.0.1'),"
+                . "('content', 'modules\\\\content\\\\ContentModule', 'icon icon-stack', 0, 0, 0, ''),"
+                . "('manager', 'modules\\\\manager\\\\ManagerModule', 'icon icon-equalizer2', 0, 1, 1, '')"
             );
             $this->db->commit();
         }

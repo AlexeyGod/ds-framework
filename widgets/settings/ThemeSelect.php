@@ -41,7 +41,7 @@ class ThemeSelect
         $themes = $this->getThemes();
 
         foreach(glob($themes.'/*') as $path)
-            $out .= '<option value="'.basename($path).'"'.(basename($path) == $this->model->value ? ' selected' : '').'>'.basename($path).'</option>';
+            if(is_dir($path)) $out .= '<option value="'.basename($path).'"'.(basename($path) == $this->model->value ? ' selected' : '').'>'.basename($path).'</option>';
 
         $out .= '</select>';
 
